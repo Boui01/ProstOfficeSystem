@@ -1,0 +1,15 @@
+AND(
+  AND(
+    TODAY() = [วันที่ส่ง],
+    IF([สถานะขนส่ง] = FALSE , TRUE , FALSE)
+    ),
+   OR( 
+     AND(
+       [รหัสพนักงานขนส่ง] = LOOKUP(USEREMAIL(), "Staff_transport", "อีเมล", "รหัสพนักงานขนส่ง")
+       ,
+       [สถานะขนส่ง] = FALSE
+      ),
+
+      ISNOTBLANK( LOOKUP(USEREMAIL(), "Staff", "อีเมล", "รหัสพนักงาน") )
+    )
+)
